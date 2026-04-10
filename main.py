@@ -2,10 +2,12 @@ from fastapi import FastAPI, UploadFile, File
 import pdfplumber
 import requests
 
-app = FastAPI()
 
-# 🔐 Put your OpenRouter API key here
-OPENROUTER_API_KEY = "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"
+app = FastAPI()
+import os
+OPENROUTER_API_KEY = os.getenv("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")
+
+
 
 # ------------------ HOME ------------------
 @app.get("/")
