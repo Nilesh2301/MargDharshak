@@ -5,7 +5,7 @@ import requests
 app = FastAPI()
 
 # 🔐 Put your OpenRouter API key here
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 # ------------------ HOME ------------------
 @app.get("/")

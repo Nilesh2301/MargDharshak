@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+BACKEND_URL = "https://margdharshakx.onrender.com"
 
 st.set_page_config(page_title="मार्गदर्शक", page_icon="🚀", layout="wide")
 
@@ -42,7 +43,7 @@ if page == "📄 Resume Analysis":
             with st.spinner("Analyzing..."):
                 try:
                     response = requests.post(
-                        "http://127.0.0.1:8000/analyze",
+                        "https://margdharshakx.onrender.com/analyze",
                         files={"file": uploaded_file}
                     )
                     result = response.json()
@@ -76,7 +77,7 @@ elif page == "💬 AI Mentor":
             with st.spinner("Thinking..."):
                 try:
                     response = requests.post(
-                        "http://127.0.0.1:8000/chat",
+                        "https://margdharshakx.onrender.com/chat",
                         params={"message": user_input}
                     )
                     result = response.json()
