@@ -3,3 +3,5 @@ uvicorn
 pdfplumber
 requests
 python-multipart
+streamlit
+requests
