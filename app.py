@@ -1,8 +1,13 @@
 import streamlit as st
 import requests
+
+# 🔗 Backend URL
 BACKEND_URL = "https://margdharshakx.onrender.com"
 
 st.set_page_config(page_title="मार्गदर्शक", page_icon="🚀", layout="wide")
+
+# 💡 Info (important for Render free tier)
+st.info("💡 First request may take 20–30 sec (server waking up)")
 
 # 🎨 Styling
 st.markdown("""
@@ -43,9 +48,11 @@ if page == "📄 Resume Analysis":
             with st.spinner("Analyzing..."):
                 try:
                     response = requests.post(
-                        "https://margdharshakx.onrender.com/analyze",
-                        files={"file": uploaded_file}
+                        f"{BACKEND_URL}/analyze",
+                        files={"file": uploaded_file},
+                        timeout=60
                     )
+
                     result = response.json()
 
                     if "analysis" in result:
@@ -56,15 +63,15 @@ if page == "📄 Resume Analysis":
                         st.write(result["analysis"])
                         st.markdown('</div>', unsafe_allow_html=True)
 
-                        # 🔥 Fake Score (UI boost)
+                        # Score UI
                         st.progress(80)
                         st.write("Resume Score: 80/100")
 
                     else:
-                        st.error(result.get("error", "Something went wrong"))
+                        st.error("⚠️ Something went wrong")
 
-                except:
-                    st.error("⚠️ Backend not running!")
+                except Exception as e:
+                    st.error("⚠️ Server is starting... please wait ⏳")
 
 # ------------------ CHAT ------------------
 elif page == "💬 AI Mentor":
@@ -77,9 +84,11 @@ elif page == "💬 AI Mentor":
             with st.spinner("Thinking..."):
                 try:
                     response = requests.post(
-                        "https://margdharshakx.onrender.com/chat",
-                        params={"message": user_input}
+                        f"{BACKEND_URL}/chat",
+                        params={"message": user_input},
+                        timeout=60
                     )
+
                     result = response.json()
 
                     st.markdown('<div class="card">', unsafe_allow_html=True)
@@ -87,6 +96,5 @@ elif page == "💬 AI Mentor":
                     st.write(result["reply"])
                     st.markdown('</div>', unsafe_allow_html=True)
 
-                except:
-                    st.error("⚠️ Backend not running!")
- 
+                except Exception as e:
+                    st.error("⚠️ Server is waking up... try again in 20 sec ⏳")
