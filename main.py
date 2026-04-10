@@ -5,7 +5,7 @@ import requests
 
 app = FastAPI()
 import os
-OPENROUTER_API_KEY = os.getenv("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")
+OPENROUTER_API_KEY = os.getenv("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")
 
 
 
